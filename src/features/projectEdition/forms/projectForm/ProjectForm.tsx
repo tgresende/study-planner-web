@@ -15,7 +15,6 @@ export const ProjectForm: FunctionComponent<InputProjectInfo> = ({
 
   const save = () => {
     const body = { projectId: projectId, name: projectName };
-    alert(JSON.stringify(body));
   };
 
   return (

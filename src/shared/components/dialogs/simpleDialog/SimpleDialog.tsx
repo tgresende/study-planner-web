@@ -1,5 +1,5 @@
 import { Dialog, DialogTitle } from "@mui/material";
-import { FunctionComponent, ReactComponentElement } from "react";
+import { FunctionComponent } from "react";
 
 interface ISimpleDialogProps {
   onClose?: Function;
