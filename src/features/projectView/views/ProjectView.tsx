@@ -27,6 +27,12 @@ function ProjectView() {
     setProjects([project, ...projects]);
   }
 
+  function deleteProject(projectId: number = 0): void {
+    const filterCondition = (project: IProject) => project.id !== projectId;
+    const filteredProject = projects.filter(filterCondition);
+    setProjects(filteredProject);
+  }
+
   return (
     <Card>
       <h1>Projects</h1>
@@ -37,7 +43,11 @@ function ProjectView() {
         <CircularProgress />
       ) : (
         projects.map((project) => (
-          <ProjectCard projectId={project.projectId} name={project.name} />
+          <ProjectCard
+            projectId={project.id}
+            name={project.name}
+            onDelete={deleteProject}
+          />
         ))
       )}
       <SimpleDialog
