@@ -1,21 +1,18 @@
 import React from "react";
+import { Routes, Route } from "react-router-dom";
+import NotFound from "./features/error/NotFound";
+import Project from "./features/project/Project";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="App">
+        <Routes>
+          <Route path="/" element={<Project />} />
+          <Route path="/project" element={<Project />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </div>
     </div>
   );
 }
