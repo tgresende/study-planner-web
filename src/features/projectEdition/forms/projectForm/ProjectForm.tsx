@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from "react";
 import Card from "@mui/material/Card";
 import { Button, TextField } from "@mui/material";
+import { getAllProjects } from "../../api/projectEditionApi";
 
 interface InputProjectInfo {
   projectId?: number;
@@ -14,7 +15,7 @@ export const ProjectForm: FunctionComponent<InputProjectInfo> = ({
   const [projectName, setProjectName] = React.useState<string>(name);
 
   const save = () => {
-    const body = { projectId: projectId, name: projectName };
+    getAllProjects();
   };
 
   return (
