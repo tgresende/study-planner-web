@@ -2,13 +2,14 @@ import { Dialog, DialogTitle } from "@mui/material";
 import { FunctionComponent } from "react";
 
 interface ISimpleDialogProps {
-  onClose?: Function;
+  onClose: Function;
   open: boolean;
   childComponent: React.ReactNode;
+  title: string;
 }
 
 export const SimpleDialog: FunctionComponent<ISimpleDialogProps> = (props) => {
-  const { onClose = () => null, open, childComponent } = props;
+  const { onClose, open, childComponent, title } = props;
 
   const handleClose = () => {
     onClose();
@@ -16,7 +17,7 @@ export const SimpleDialog: FunctionComponent<ISimpleDialogProps> = (props) => {
 
   return (
     <Dialog onClose={handleClose} open={open}>
-      <DialogTitle>Set backup account</DialogTitle>
+      <DialogTitle>{title}</DialogTitle>
       {childComponent}
     </Dialog>
   );

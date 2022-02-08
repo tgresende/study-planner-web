@@ -22,6 +22,11 @@ function ProjectView() {
     getProjects();
   }, []);
 
+  function onCloseParentFunction(project: IProject): void {
+    setIsDialogOpen(false);
+    setProjects([project, ...projects]);
+  }
+
   return (
     <Card>
       <h1>Projects</h1>
@@ -38,7 +43,8 @@ function ProjectView() {
       <SimpleDialog
         open={isDialogOpen}
         onClose={() => setIsDialogOpen(false)}
-        childComponent={<ProjectForm />}
+        childComponent={<ProjectForm closeParent={onCloseParentFunction} />}
+        title={"Inserir Novo Projeto"}
       />
     </Card>
   );
