@@ -1,13 +1,13 @@
 import axios from "axios";
 
-export const HTTPGet = (URL: string): any => {
-  return axios.get(URL).then((res) => res.data);
+export const HTTPGet = async (URL: string): Promise<any> => {
+  return await axios.get(URL).then((res) => res.data);
 };
 
-export const HTTPPost = (URL: string, body: object): any => {
+export const HTTPPost = async (URL: string, body: object): Promise<any> => {
   return axios.post(URL, body).then((res) => res.data);
 };
 
-export const HTTPDelete = (URL: string): any => {
+export const HTTPDelete = async (URL: string): Promise<any> => {
   return axios.delete(URL).then((res) => res.data);
 };

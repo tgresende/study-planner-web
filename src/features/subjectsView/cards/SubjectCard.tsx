@@ -1,4 +1,5 @@
-import React, { FunctionComponent } from "react";
+import { Card } from "@mui/material";
+import { FunctionComponent } from "react";
 import { ISubject } from "../api/SubjectsViewApiInterface";
 
 type subjectCardEntries = {
@@ -8,11 +9,11 @@ type subjectCardEntries = {
 export const SubjectCard: FunctionComponent<subjectCardEntries> = ({
   subjectInfo,
 }) => {
-  const { name, subjectId } = subjectInfo;
+  const { name, weight } = subjectInfo;
   return (
-    <div>
-      {name} - {subjectId}
-    </div>
+    <Card style={{padding: 8, margin: 8}}>
+      {name} - {weight}
+    </Card>
   );
 };
 

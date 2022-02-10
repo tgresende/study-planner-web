@@ -7,7 +7,7 @@ function SubjectsView() {
   const [subjects, setSubjects] = React.useState<ISubject[] | []>([]);
 
   async function getSubjects() {
-    const sub = await getAllSubjects(3);
+    const sub = await getAllSubjects(1002);
     setSubjects(sub);
   }
 
