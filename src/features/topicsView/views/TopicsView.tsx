@@ -9,7 +9,7 @@ function TopicsView(){
   const [topics, setTopics] = React.useState<ITopic[] | []>([]);
 
   async function getTopics() {
-    const topics = await getAllTopics(1002);
+    const topics = await getAllTopics(2012);
     setTopics(topics);
   }
 
