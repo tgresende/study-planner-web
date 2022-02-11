@@ -1,18 +1,21 @@
-import React from "react";
-
+import React, { FunctionComponent } from "react";
 import { Divider, IconButton, Typography } from "@mui/material";
-
 import { getAllTopics } from "../api/TopicsViewApi";
 import { ITopic } from "../api/TopicsViewApiInterface";
 import TopicCard from "../cards/TopicCard";
 
+type topicViewEntries = {
+  subjectId: number;
+};
 
-function TopicsView(){
-
+const TopicsView : FunctionComponent<topicViewEntries> = ({
+  subjectId
+}) =>
+{
   const [topics, setTopics] = React.useState<ITopic[] | []>([]);
 
   async function getTopics() {
-    const topics = await getAllTopics(2012);
+    const topics = await getAllTopics(subjectId);
     setTopics(topics);
   }
 
