@@ -11,18 +11,11 @@ function TopicTasksView(){
 
   const [topics, setTopics] = React.useState<ITopicTask[] | []>([]);
 
-  const topicA : ITopicTask= {
-    name : "Aula 0 -  Estratégia",
-    subjectId : 1,
-    topicId: 1
-  }
-
-  const topicsMock = [topicA]
   async function getTopics() {
     const topics = await getAllTopicTasks(2012);
     setTopics(topics);
   }
-
+  
   React.useEffect(() => {
     getTopics();
   }, []);
@@ -37,7 +30,7 @@ function TopicTasksView(){
         +
         </IconButton>
       <Divider/>
-      {topicsMock.map((topic) => (
+      {topics.map((topic) => (
         <TopicCard topicInfo={topic} />
       ))}
     </div>
