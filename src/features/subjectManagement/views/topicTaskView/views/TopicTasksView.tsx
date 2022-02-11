@@ -2,16 +2,16 @@ import React from "react";
 
 import { Divider, IconButton, Typography } from "@mui/material";
 
-import { getAllTopics } from "../api/TopicsViewApi";
-import { ITopic } from "../api/TopicsViewApiInterface";
-import TopicCard from "../cards/TopicCard";
+import { getAllTopicTasks } from "../api/TopicTasksViewApi";
+import { ITopicTask } from "../api/TopicTasksViewApiInterface";
+import TopicCard from "../cards/TopicTaskCard";
 
 
-function TopicsView(){
+function TopicTasksView(){
 
-  const [topics, setTopics] = React.useState<ITopic[] | []>([]);
+  const [topics, setTopics] = React.useState<ITopicTask[] | []>([]);
 
-  const topicA : ITopic= {
+  const topicA : ITopicTask= {
     name : "Aula 0 -  Estratégia",
     subjectId : 1,
     topicId: 1
@@ -19,7 +19,7 @@ function TopicsView(){
 
   const topicsMock = [topicA]
   async function getTopics() {
-    const topics = await getAllTopics(2012);
+    const topics = await getAllTopicTasks(2012);
     setTopics(topics);
   }
 
@@ -29,15 +29,13 @@ function TopicsView(){
 
   return (
     <div>
-      <Typography>
-        <IconButton>
+       <IconButton>
         V
         </IconButton>
-          Topicos
+          Ciclos
         <IconButton>
         +
         </IconButton>
-      </Typography>
       <Divider/>
       {topicsMock.map((topic) => (
         <TopicCard topicInfo={topic} />
@@ -46,4 +44,4 @@ function TopicsView(){
   );
 }
 
-export default TopicsView;
+export default TopicTasksView;
