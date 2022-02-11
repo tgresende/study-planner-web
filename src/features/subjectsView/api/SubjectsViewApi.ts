@@ -4,15 +4,8 @@ import { ISubject } from "./SubjectsViewApiInterface";
 
 export async function getAllSubjects(projectId: number = 0): Promise<ISubject[]> {
   const URL = mountURLgetAllSubjectsFromProject(projectId);
-  //const subjects = await HTTPGet(URL);
+  const subjects = await HTTPGet(URL);
 
-  const subject1 : ISubject = {
-    name: "assunto",
-    subjectId: 1,
-    weight: 10
-  }
-  
-  const subjects = [subject1];
   return subjects;
 }
 
