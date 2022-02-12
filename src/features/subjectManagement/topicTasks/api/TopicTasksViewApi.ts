@@ -1,5 +1,5 @@
-import { API_BASE_ADDRESS } from "../../../../../configuration/api/apiConfiguration";
-import { HTTPGet } from "../../../../../shared/api/apiHandle";
+import { API_BASE_ADDRESS } from "../../../../configuration/api/apiConfiguration";
+import { HTTPGet } from "../../../../shared/api/apiHandle";
 import { ITopicTask } from "./TopicTasksViewApiInterface";
 
 export async function getAllTopicTasks(subjectId: number = 0): Promise<ITopicTask[]> {
@@ -9,4 +9,4 @@ export async function getAllTopicTasks(subjectId: number = 0): Promise<ITopicTas
 }
 
 const mountURLgetAllTopicsFromProject = (subjectId: number): string =>
-  API_BASE_ADDRESS + `/Topics/GetTopicsFromSubject/${subjectId}`;
+  API_BASE_ADDRESS + `/Topics/GetTopicsFromSubject2/${subjectId}`;
