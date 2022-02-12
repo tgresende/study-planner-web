@@ -21,6 +21,7 @@ export const HTTPDelete = async (URL: string): Promise<any> => {
 };
 
 const handleResponse = (response:any) =>{
+  alert(JSON.stringify(response.data))
   if (handleResponseStatus(response.status) === SUCCESS){
     return{
       status: SUCCESS, 

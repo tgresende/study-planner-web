@@ -3,6 +3,8 @@ import Card from "@mui/material/Card";
 import { Button, InputLabel, MenuItem, Select, TextField, Typography } from "@mui/material";
 import { IAddTopicTaskRequestModel, saveTopicTask } from "./newTopicTaskFormUtils";
 import { SUCCESS } from "../../../../shared/api/apiHandle";
+import { TopicsContext, TopicsContextType } from "../../../../context/TopicsContext";
+import { TopicTaskActions } from "../../../../shared/constants/TopicTaskConstants";
 
 interface InputTopicInfo {
   subjectName :string;
@@ -19,6 +21,8 @@ export const NewTopicTaskForm: FunctionComponent<InputTopicInfo> = ({
   const [actionDescription, setActionDescription] = React.useState<string>("");
   const [actionSource, setActionSource] = React.useState<string>("");
   const [topicId, setTopicId] = React.useState<number>(0);
+  const { topics } = React.useContext(TopicsContext)! as TopicsContextType;
+
 
 
   const save = async () => {
@@ -26,14 +30,14 @@ export const NewTopicTaskForm: FunctionComponent<InputTopicInfo> = ({
       action: action,
       actionDescription: actionDescription,
       actionSource: actionSource,
-      correctQuestionQuantity: 0,
-      doneQuestionQuantity: 0,
-      revisionItem: "",
       topicId: topicId,
     };
 
+    alert(JSON.stringify(inputTopicTaskData));
+
     const result = await saveTopicTask(inputTopicTaskData);
 
+    alert(JSON.stringify(result));
     if (result.status === SUCCESS){
       addtopicToView(result.data);
       closeParent();
@@ -57,17 +61,22 @@ export const NewTopicTaskForm: FunctionComponent<InputTopicInfo> = ({
           label="Age"
           onChange={(event)=>setTopicId(parseInt(event.target.value.toString()))}
         >
-          <MenuItem value={10}>tópico 1</MenuItem>
-          <MenuItem value={20}>tópico 2</MenuItem>
-          <MenuItem value={30}>tópico 3</MenuItem>
-        </Select>
-      <TextField
-        id="standard-basic"
-        label="Ação - fazer select depois"
-        variant="standard"
-        value={action}
-        onChange={(e) => setAction(e.target.value)}
-      />
+            {topics.map((topic) =>  
+                <MenuItem value={topic.topicId}>{topic.name}</MenuItem>
+            )}
+      </Select>
+      <InputLabel id="demo-simple-select-label">Ação</InputLabel>
+      <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={action}
+          label="Age"
+          onChange={(event)=>setAction(event.target.value)}
+        >
+            {TopicTaskActions.map((action) =>  
+                <MenuItem value={action}>{action}</MenuItem>
+            )}
+      </Select>
       <TextField
         id="standard-basic"
         label="Descrição"
