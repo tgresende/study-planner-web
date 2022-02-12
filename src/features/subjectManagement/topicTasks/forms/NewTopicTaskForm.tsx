@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from "react";
 import Card from "@mui/material/Card";
-import { Button, TextField, Typography } from "@mui/material";
+import { Button, InputLabel, MenuItem, Select, TextField, Typography } from "@mui/material";
 import { IAddTopicTaskRequestModel, saveTopicTask } from "./newTopicTaskFormUtils";
 import { SUCCESS } from "../../../../shared/api/apiHandle";
 
@@ -43,19 +43,24 @@ export const NewTopicTaskForm: FunctionComponent<InputTopicInfo> = ({
     alert(result.data);
   };
 
+
   return (
-    <Card>
-      <Typography>
-        inserir Tarefa - {subjectName}
+    <Card style={styles.root as React.CSSProperties}>
+      <Typography style={{marginBottom: 24}}>
+        {subjectName}
       </Typography>
-      <TextField
-        id="standard-basic"
-        label="Tópico - fazer select depois"
-        variant="standard"
-        type="number"
-        value={topicId}
-        onChange={(e) => setTopicId(parseInt(e.target.value))}
-      />
+      <InputLabel id="demo-simple-select-label">Tópico</InputLabel>
+      <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={topicId}
+          label="Age"
+          onChange={(event)=>setTopicId(parseInt(event.target.value.toString()))}
+        >
+          <MenuItem value={10}>tópico 1</MenuItem>
+          <MenuItem value={20}>tópico 2</MenuItem>
+          <MenuItem value={30}>tópico 3</MenuItem>
+        </Select>
       <TextField
         id="standard-basic"
         label="Ação - fazer select depois"
@@ -81,5 +86,14 @@ export const NewTopicTaskForm: FunctionComponent<InputTopicInfo> = ({
     </Card>
   );
 };
+
+const styles ={
+    root:{
+        display:"flex",
+        flexDirection: "column",
+        padding: 16
+    }
+
+}
 
 export default NewTopicTaskForm;
