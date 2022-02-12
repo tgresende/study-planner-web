@@ -3,10 +3,10 @@ import React, { FunctionComponent } from "react";
 import { Divider, IconButton } from "@mui/material";
 
 import TopicTaskCard from "../cards/TopicTaskCard";
-import { getAllTopicTasks } from "../api/TopicTasksViewApi";
-import { ITopicTask } from "../api/TopicTasksViewApiInterface";
+import { getActiveTopicTasks } from "../api/TopicTasksViewApi";
 import { SimpleDialog } from "../../../../shared/components/dialogs/simpleDialog/SimpleDialog";
 import NewTopicTaskForm from "../forms/NewTopicTaskForm";
+import { TopicTasksContext, TopicTasksContextType } from "../../../../context/TopicTasksContext";
 
 
 type TopicTasksViewEntries = {
@@ -18,16 +18,16 @@ const TopicTasksView : FunctionComponent<TopicTasksViewEntries> = ({
   subjectId,
   subjectName
 }) => {
-  const [topics, setTopics] = React.useState<ITopicTask[] | []>([]);
+  const { setTopicTasksList, topicTasks } = React.useContext(TopicTasksContext)! as TopicTasksContextType;
   const [isNewTaskTopicDialogOpen, setIsNewTaskTopicDialogOpen] = React.useState<boolean>(false);
 
-  async function getTopics() {
-    const topics = await getAllTopicTasks(subjectId);
-    setTopics(topics);
+  async function getTopicTasks() {
+    const tasks = await getActiveTopicTasks(subjectId);
+    setTopicTasksList(tasks);
   }
   
   React.useEffect(() => {
-    getTopics();
+    getTopicTasks();
   }, []);
 
   return (
@@ -41,8 +41,8 @@ const TopicTasksView : FunctionComponent<TopicTasksViewEntries> = ({
         </IconButton>
       <Divider/>
       <div>
-        {topics.map((topic) => (
-        <TopicTaskCard topicInfo={topic} />
+        {topicTasks.map((task) => (
+        <TopicTaskCard topicTaskInfo={task} />
         ))}
         <SimpleDialog
             open={isNewTaskTopicDialogOpen}

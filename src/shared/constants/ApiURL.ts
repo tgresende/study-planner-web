@@ -5,3 +5,4 @@ export const getURLInsertTopic = (): string => API_BASE_ADDRESS + "/Topics/Inser
 
 //TopicTask
 export const getURLInsertTopicTask = (): string => API_BASE_ADDRESS + "/TopicTasks/InsertNewTopicTask";
+export const getURLGetActiveTopicTask = (topicId:number): string => API_BASE_ADDRESS + "/TopicTasks/GetActiveTopicTasks/"+topicId;

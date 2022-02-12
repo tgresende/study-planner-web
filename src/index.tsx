@@ -4,13 +4,16 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import TopicsProvider from "./context/TopicsContext";
+import TopicTasksProvider from "./context/TopicTasksContext";
 
 ReactDOM.render(
   <React.StrictMode>
     <TopicsProvider>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
+      <TopicTasksProvider>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </TopicTasksProvider>
     </TopicsProvider>
   </React.StrictMode>,
   document.getElementById("root")
