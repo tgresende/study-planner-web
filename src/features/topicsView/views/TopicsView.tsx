@@ -1,10 +1,10 @@
 import React, { FunctionComponent } from "react";
 import { Divider, IconButton, Typography } from "@mui/material";
 import { getAllTopics } from "../api/TopicsViewApi";
-import { ITopic } from "../api/TopicsViewApiInterface";
 import TopicCard from "../cards/TopicCard";
 import { SimpleDialog } from "../../../shared/components/dialogs/simpleDialog/SimpleDialog";
 import NewTopicForm from "../../subjectManagement/topics/forms/newTopicForm/NewTopicForm";
+import { ITopic, TopicsContext, TopicsContextType } from "../../../context/TopicsContext";
 
 type topicViewEntries = {
   subjectId: number;
@@ -16,7 +16,7 @@ const TopicsView : FunctionComponent<topicViewEntries> = ({
   subjectName
 }) =>
 {
-  const [topics, setTopics] = React.useState<ITopic[] | []>([]);
+  const { setTopicsList, topics } = React.useContext(TopicsContext)! as TopicsContextType;
   const [isNewDialogTopicOpen, setIsNewDialogTopicOpen] = React.useState<boolean>(false);
   const [showTopics, setShowTopics] = React.useState<boolean>(true);
 
@@ -25,12 +25,12 @@ const TopicsView : FunctionComponent<topicViewEntries> = ({
   }
 
   function addtopicToView(newTopic:ITopic ){
-    setTopics([...topics, newTopic ])
+    setTopicsList([...topics, newTopic ])
   }
 
   async function getTopics() {
     const topics = await getAllTopics(subjectId);
-    setTopics(topics);
+    setTopicsList(topics)
   }
 
   function showStatusAccordin(){
