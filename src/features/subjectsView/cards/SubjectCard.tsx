@@ -1,5 +1,6 @@
-import { Card } from "@mui/material";
 import { FunctionComponent } from "react";
+import { useNavigate } from "react-router-dom";
+import { Card } from "@mui/material";
 import { ISubject } from "../api/SubjectsViewApiInterface";
 
 type subjectCardEntries = {
@@ -10,8 +11,17 @@ export const SubjectCard: FunctionComponent<subjectCardEntries> = ({
   subjectInfo,
 }) => {
   const { name, weight } = subjectInfo;
+  const navigate = useNavigate();
+
+  function navigateToSubjectManagement(){
+    navigate('/subjectManagement', { state: { subject: subjectInfo } });
+  }
+
   return (
-    <Card style={{padding: 8, margin: 8}}>
+    <Card 
+      style={{padding: 8, margin: 8}} 
+      onClick={navigateToSubjectManagement}
+    >
       {name} - {weight}
     </Card>
   );

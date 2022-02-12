@@ -1,12 +1,26 @@
-import { useNavigate } from "react-router-dom";
-
+import { useLocation, useNavigate } from "react-router-dom";
 import { IconButton, Typography } from "@mui/material";
 import TopicsView from "../topicsView/views/TopicsView";
 import TopicTasksView from "./views/topicTaskView/views/TopicTasksView";
 
-function SubjectManagement(){
+type SubjectInfo = {
+    name: string;
+    subjectId: number;
+    weight: number;
+}
 
+type stateSubject = {
+    subject: SubjectInfo;
+}
+
+function SubjectManagement(){
     const navigate = useNavigate();
+    const location = useLocation();
+    const state = location.state as stateSubject;
+    const subject : SubjectInfo = state.subject as SubjectInfo;
+
+    const {name, weight, subjectId} = subject;
+
     function navigateToSubjectsView(){
         navigate('/subject')
     }
@@ -14,11 +28,14 @@ function SubjectManagement(){
     return<>
         <Typography>
             <IconButton onClick={navigateToSubjectsView}>
-                menu
+                m
             </IconButton>
-            Nome da matéria
+            assunto {name} - peso {weight} - id {subjectId}
         </Typography>
-        <TopicsView/>
+        <TopicsView 
+            subjectId={subjectId}
+            subjectName={name}
+        />
         <TopicTasksView/>
 
     </>
