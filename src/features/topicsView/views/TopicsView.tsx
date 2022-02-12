@@ -33,6 +33,11 @@ const TopicsView : FunctionComponent<topicViewEntries> = ({
     setTopics(topics);
   }
 
+  function showStatusAccordin(){
+    if (showTopics) return 'V';
+    return '>'
+  }
+
   React.useEffect(() => {
     getTopics();
   }, []);
@@ -41,7 +46,7 @@ const TopicsView : FunctionComponent<topicViewEntries> = ({
     <div>
       <Typography>
         <IconButton onClick={handleShowTopiccs}>
-        V
+         {showStatusAccordin()}
         </IconButton>
           Topicos
         <IconButton onClick={()=>setIsNewDialogTopicOpen(true)}>
@@ -50,7 +55,7 @@ const TopicsView : FunctionComponent<topicViewEntries> = ({
       </Typography>
       <Divider/>
       {showTopics &&
-        <>
+        <div style={styles.TopicCardsContainer as React.CSSProperties}>
           {topics.map((topic) => (
             <TopicCard topicInfo={topic} />
             ))}
@@ -67,10 +72,18 @@ const TopicsView : FunctionComponent<topicViewEntries> = ({
               />
             }
           />
-        </>
+        </div>
       }
     </div>
   );
+}
+
+const styles ={
+  TopicCardsContainer: {
+    display: "flex",
+    flexDirection: "row",
+    flexWrap: "wrap"
+  }
 }
 
 export default TopicsView;
