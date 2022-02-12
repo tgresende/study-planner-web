@@ -32,7 +32,10 @@ function SubjectManagement(){
             </IconButton>
             assunto {name} - peso {weight} - id {subjectId}
         </Typography>
-        <TopicsView subjectId={subjectId}/>
+        <TopicsView 
+            subjectId={subjectId}
+            subjectName={name}
+        />
         <TopicTasksView/>
 
     </>
