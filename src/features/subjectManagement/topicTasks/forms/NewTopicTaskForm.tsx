@@ -9,21 +9,19 @@ import { TopicTaskActions } from "../../../../shared/constants/TopicTaskConstant
 interface InputTopicInfo {
   subjectName :string;
   closeParent: Function;
-  addtopicToView: Function;
+  addTopicTaskContext: Function;
 }
 
 export const NewTopicTaskForm: FunctionComponent<InputTopicInfo> = ({
   subjectName,
   closeParent,
-  addtopicToView
+  addTopicTaskContext
 }) => {
   const [action, setAction] = React.useState<string>("");
   const [actionDescription, setActionDescription] = React.useState<string>("");
   const [actionSource, setActionSource] = React.useState<string>("");
   const [topicId, setTopicId] = React.useState<number>(0);
   const { topics } = React.useContext(TopicsContext)! as TopicsContextType;
-
-
 
   const save = async () => {
     const inputTopicTaskData: IAddTopicTaskRequestModel = {
@@ -33,18 +31,13 @@ export const NewTopicTaskForm: FunctionComponent<InputTopicInfo> = ({
       topicId: topicId,
     };
 
-    alert(JSON.stringify(inputTopicTaskData));
-
     const result = await saveTopicTask(inputTopicTaskData);
 
-    alert(JSON.stringify(result));
     if (result.status === SUCCESS){
-      addtopicToView(result.data);
+      addTopicTaskContext(result.data);
       closeParent();
       return;
     }
-
-    alert(result.data);
   };
 
 
