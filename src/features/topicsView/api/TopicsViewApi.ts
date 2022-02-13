@@ -1,6 +1,6 @@
 import { API_BASE_ADDRESS } from "../../../configuration/api/apiConfiguration";
+import { ITopic } from "../../../context/TopicsContext";
 import { HTTPGet } from "../../../shared/api/apiHandle";
-import { ITopic } from "./TopicsViewApiInterface";
 
 export async function getAllTopics(subjectId: number = 0): Promise<ITopic[]> {
   const URL = mountURLgetAllTopicsFromProject(subjectId);

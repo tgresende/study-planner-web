@@ -7,17 +7,17 @@ import SubjectsView from "./features/subjectsView/views/SubjectsView";
 
 function App() {
   return (
-    <div className="App">
       <div className="App">
-        <Routes>
-          <Route path="/" element={<SubjectsView />} />
-          <Route path="/project" element={<ProjectView />} />
-          <Route path="/subject" element={<SubjectsView />} />
-          <Route path="/subjectManagement" element={<SubjectManagement />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <div className="App">
+          <Routes>
+            <Route path="/" element={<SubjectsView />} />
+            <Route path="/project" element={<ProjectView />} />
+            <Route path="/subject" element={<SubjectsView />} />
+            <Route path="/subjectManagement" element={<SubjectManagement />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </div>
       </div>
-    </div>
   );
 }
 
