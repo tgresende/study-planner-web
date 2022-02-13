@@ -1,9 +1,10 @@
 import React from 'react';
 
 export interface ITopicTask {
-	action: string;
-	topicId: number;
 	topicTaskId: number;
+	topicName: string;
+	topicId: number;
+	action: string;
 	actionDescription: string;
 	actionSource: string;
 }
