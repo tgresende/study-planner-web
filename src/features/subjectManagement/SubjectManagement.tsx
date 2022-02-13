@@ -1,7 +1,7 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { IconButton, TextField, Typography } from "@mui/material";
 import TopicsView from "../topicsView/views/TopicsView";
-import TopicTasksView from "./views/topicTaskView/views/TopicTasksView";
+import TopicTasksView from "./topicTasks/views/TopicTasksView";
 import React from "react";
 
 type SubjectInfo = {
@@ -67,7 +67,10 @@ function SubjectManagement(){
             subjectId={subjectId}
             subjectName={name}
         />
-        <TopicTasksView/>
+        <TopicTasksView 
+            subjectId={subjectId}
+            subjectName={name}
+        />
 
     </>
 }

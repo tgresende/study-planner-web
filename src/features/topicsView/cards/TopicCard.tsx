@@ -1,6 +1,6 @@
 import { Card, IconButton, Typography } from "@mui/material";
 import { FunctionComponent } from "react";
-import { ITopic } from "../api/TopicsViewApiInterface";
+import { ITopic } from "../../../context/TopicsContext";
 
 type topicCardEntries = {
   topicInfo: ITopic;

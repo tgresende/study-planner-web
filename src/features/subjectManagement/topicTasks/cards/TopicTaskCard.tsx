@@ -1,25 +1,25 @@
-import { Button, Card, IconButton, Typography } from "@mui/material";
+import { Button, Card, Typography } from "@mui/material";
 import { FunctionComponent } from "react";
-import { ITopicTask } from "../api/TopicTasksViewApiInterface";
+import { ITopicTask } from "../../../../context/TopicTasksContext";
 
 type topicCardEntries = {
-  topicInfo: ITopicTask;
+  topicTaskInfo: ITopicTask;
 };
 
 export const TopicTaskCard: FunctionComponent<topicCardEntries> = ({
-  topicInfo,
+  topicTaskInfo,
 }) => {
-  const { name } = topicInfo;
+  const { action, actionDescription, actionSource } = topicTaskInfo;
   return (
     <Card style={styles.root}>
         <Typography>
-          Leitura
+          {action}
         </Typography>
         <Typography>
-          {name}
+          {actionDescription}
         </Typography>
         <Typography>
-          descricao da tarefa
+          {actionSource}
         </Typography>
         <Typography>
             i:30 min
