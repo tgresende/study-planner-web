@@ -1,8 +1,9 @@
+import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { IconButton, TextField, Typography } from "@mui/material";
 import TopicsView from "../topicsView/views/TopicsView";
 import TopicTasksView from "./topicTasks/views/TopicTasksView";
-import React from "react";
+import {saveAnnotations} from "./functions/subjectManagementFunctions";
 
 type SubjectInfo = {
     name: string;
@@ -29,8 +30,8 @@ function SubjectManagement(){
         navigate('/subject')
     }
 
-    function saveAnnotations(){
-        
+    function saveSubjectAnnotations(){
+        saveAnnotations(subjectId, annotations);
         setAnnotationsEditionMode(false)
     }
 
@@ -58,7 +59,7 @@ function SubjectManagement(){
         </IconButton>
         <IconButton 
             size={"small"} 
-            onClick={saveAnnotations}
+            onClick={saveSubjectAnnotations}
             disabled={!annotationsEditionMode}
         >
                 salvar
