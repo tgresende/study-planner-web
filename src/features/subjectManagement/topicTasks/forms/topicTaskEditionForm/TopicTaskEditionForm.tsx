@@ -1,6 +1,11 @@
 import { Button, Card, TextField, Typography } from "@mui/material";
 import React, { FunctionComponent } from "react";
-import { ITopicTask } from "../../../../../context/TopicTasksContext";
+import { 
+  ITopicTask, 
+  TopicTasksContext, 
+  TopicTasksContextType 
+} from "../../../../../context/TopicTasksContext";
+import { UpdateTopicTask } from "./topicTaskEditionFormFunctions";
 
 
 interface EditTopicTaskInfo {
@@ -17,24 +22,31 @@ export const TopicTaskEditionForm: FunctionComponent<EditTopicTaskInfo> = ({
     actionSource : source, 
     topicName, 
     action,
+    topicId
   } = topicTaskData;
 
   const [actionDescription, setActionDescription] = React.useState<string>(description);
   const [actionSource, setActionSource] = React.useState<string>(source);
 
+  const { updateTopicTask } = React.useContext(TopicTasksContext)! as TopicTasksContextType;
+
+
   const save = async () => {
-    // const inputTopicTaskData: IAddTopicTaskRequestModel = {
-    //   actionDescription: actionDescription,
-    //   actionSource: actionSource,
-    //   topicTaskid: topicTaskData.topicTaskid
-    // };
+    
+    UpdateTopicTask(
+      topicId,
+      actionDescription,
+      actionSource
+    );
 
-    // const result = await saveTopicTask(inputTopicTaskData);
+    updateTopicTask({
+        ...topicTaskData, 
+        actionDescription,
+        actionSource
+      }
+    );
 
-    // if (result.status === SUCCESS){
-    //   closeParent();
-    //   return;
-    // }
+    closeParent();
   };
 
 
