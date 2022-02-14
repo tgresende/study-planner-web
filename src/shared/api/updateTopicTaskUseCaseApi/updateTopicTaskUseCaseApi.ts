@@ -5,12 +5,13 @@ import { HTTPPost } from "../apiHandle";
 const URL = API_BASE_ADDRESS + "/TopicTasks/UpdateTopicTask";
 
 interface UpdateTopicTaskRequestModel {
-    topicId: number;
+    topicTaskId: number;
     actionDescription: string;
     actionSource: string
 }
 
 export function updateTopicTaskService(contract : UpdateTopicTaskRequestModel){
+    alert(URL);
     HTTPPost(URL, contract);
 }
 

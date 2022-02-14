@@ -5,7 +5,7 @@ import {
   TopicTasksContext, 
   TopicTasksContextType 
 } from "../../../../../context/TopicTasksContext";
-import { UpdateTopicTask } from "./topicTaskEditionFormFunctions";
+import { updateTopicTask } from "./topicTaskEditionFormFunctions";
 
 
 interface EditTopicTaskInfo {
@@ -22,24 +22,24 @@ export const TopicTaskEditionForm: FunctionComponent<EditTopicTaskInfo> = ({
     actionSource : source, 
     topicName, 
     action,
-    topicId
+    topicTaskId
   } = topicTaskData;
 
   const [actionDescription, setActionDescription] = React.useState<string>(description);
   const [actionSource, setActionSource] = React.useState<string>(source);
 
-  const { updateTopicTask } = React.useContext(TopicTasksContext)! as TopicTasksContextType;
+  const { updateTopicTask: updateTopicTaskContext} = React.useContext(TopicTasksContext)! as TopicTasksContextType;
 
 
   const save = async () => {
     
-    UpdateTopicTask(
-      topicId,
+    updateTopicTask(
+      topicTaskId,
       actionDescription,
       actionSource
     );
 
-    updateTopicTask({
+    updateTopicTaskContext({
         ...topicTaskData, 
         actionDescription,
         actionSource
