@@ -11,7 +11,6 @@ interface UpdateTopicTaskRequestModel {
 }
 
 export function updateTopicTaskService(contract : UpdateTopicTaskRequestModel){
-    alert(URL);
     HTTPPost(URL, contract);
 }
 
