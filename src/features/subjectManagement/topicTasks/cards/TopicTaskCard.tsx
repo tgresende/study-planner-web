@@ -3,6 +3,7 @@ import { Button, Card, Typography } from "@mui/material";
 import { ITopicTask } from "../../../../context/TopicTasksContext";
 import { SimpleDialog } from "../../../../shared/components/dialogs/simpleDialog/SimpleDialog";
 import TopicTaskEditionForm from "../forms/topicTaskEditionForm/TopicTaskEditionForm";
+import TopicTaskFinalizeForm from "../forms/topicTaskFinalizeForm/TopicTaskFinalizeForm";
 
 type topicCardEntries = {
   topicTaskInfo: ITopicTask;
@@ -13,6 +14,7 @@ export const TopicTaskCard: FunctionComponent<topicCardEntries> = ({
 }) => {
   const { action, topicName } = topicTaskInfo;
   const [isEditionTaskTopicDialogOpen, setIsEditionTaskTopicDialogOpen] = React.useState<boolean>(false);
+  const [isFinalizeTaskTopicDialogOpen, setIsFinalizeTaskTopicDialogOpen] = React.useState<boolean>(false);
 
   return (
     <Card style={styles.root}>
@@ -28,7 +30,7 @@ export const TopicTaskCard: FunctionComponent<topicCardEntries> = ({
         <Button onClick={()=>setIsEditionTaskTopicDialogOpen(true)}>
           info
         </Button>
-        <Button>
+        <Button onClick={()=>setIsFinalizeTaskTopicDialogOpen(true)}>
           Finish
         </Button>
         <SimpleDialog
@@ -40,6 +42,17 @@ export const TopicTaskCard: FunctionComponent<topicCardEntries> = ({
               closeParent = {() => setIsEditionTaskTopicDialogOpen(false)}
               topicTaskData ={topicTaskInfo}
             />
+          }
+        />
+          <SimpleDialog
+            open={isFinalizeTaskTopicDialogOpen}
+            onClose={() => setIsFinalizeTaskTopicDialogOpen(false)}
+            title={"Finalizar Tarefa"}
+            childComponent={
+              <TopicTaskFinalizeForm
+                closeParent = {() => setIsFinalizeTaskTopicDialogOpen(false)}
+                topicTaskData ={topicTaskInfo}
+              />
           }
         />
         

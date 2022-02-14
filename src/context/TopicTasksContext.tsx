@@ -12,13 +12,15 @@ export interface ITopicTask {
 export type TopicTasksContextType = {
 	topicTasks: ITopicTask[],
 	setTopicTasksList: (list:any[]) => void,
-	updateTopicTask: (topicTask:ITopicTask) => void
+	updateTopicTask: (topicTask:ITopicTask) => void,
+	deleteTopicTask: (topicTaskId:number) => void
 };
 
 const defaultState = {
 	topicTasks: [],
 	setTopicTasksList: ()=>null,
 	updateTopicTask: ()=>null,
+	deleteTopicTask: ()=>null,
 };
 
 export const TopicTasksContext = React.createContext<TopicTasksContextType>(defaultState);
@@ -38,12 +40,17 @@ const TopicTasksProvider: React.FC = ({ children }) => {
 		setTopicTasks(newTopicTasks);
 	}
 
+	const deleteTopicTask = (topicTaskId:number) =>{
+		const newTopicTasks = topicTasks.filter(item => item.topicTaskId !== topicTaskId);
+		setTopicTasks(newTopicTasks);
+	}
+
 	return (
 		<TopicTasksContext.Provider value={{
 			topicTasks: topicTasks,
 			setTopicTasksList: setTopicTasksList,
-			updateTopicTask: updateTopicTask
-			
+			updateTopicTask: updateTopicTask,
+			deleteTopicTask: deleteTopicTask
 		}}>
 			{children}
 		</TopicTasksContext.Provider>

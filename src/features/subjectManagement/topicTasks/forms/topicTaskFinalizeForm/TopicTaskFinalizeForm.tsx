@@ -5,15 +5,15 @@ import {
   TopicTasksContext, 
   TopicTasksContextType 
 } from "../../../../../context/TopicTasksContext";
-import { updateTopicTask } from "./topicTaskEditionFormFunctions";
+import { finalizeTopicTask } from "./topicTaskFinalizeFormFunctions";
 
 
-interface EditTopicTaskInfo {
+interface IFinalizeTopicTaskInfo {
   closeParent: Function;
   topicTaskData: ITopicTask;
 }
 
-export const TopicTaskEditionForm: FunctionComponent<EditTopicTaskInfo> = ({
+export const TopicTaskFinalizeForm: FunctionComponent<IFinalizeTopicTaskInfo> = ({
   closeParent,
   topicTaskData
 }) => {
@@ -28,22 +28,25 @@ export const TopicTaskEditionForm: FunctionComponent<EditTopicTaskInfo> = ({
 
   const [actionDescription, setActionDescription] = React.useState<string>(description);
   const [actionSource, setActionSource] = React.useState<string>(source);
+  const [revisionItem, setRevisionItem] = React.useState<string>("");
+  const [doneQuestionQuantity, setDoneQuestionQuantity] = React.useState<number>(0);
+  const [correctQuestionQuantity, setCorrectQuestionQuantity] = React.useState<number>(0);
 
-  const { updateTopicTask: updateTopicTaskContext} = React.useContext(TopicTasksContext)! as TopicTasksContextType;
+
+  const { deleteTopicTask: deleteTopicTaskContext} = React.useContext(TopicTasksContext)! as TopicTasksContextType;
 
 
   const save = async () => {
     
-    updateTopicTask(
+    deleteTopicTaskContext(topicTaskId);
+
+    finalizeTopicTask({
       topicTaskId,
       actionDescription,
-      actionSource
-    );
-
-    updateTopicTaskContext({
-        ...topicTaskData, 
-        actionDescription,
-        actionSource
+      actionSource,
+      revisionItem,
+      doneQuestionQuantity,
+      correctQuestionQuantity
       }
     );
 
@@ -73,6 +76,29 @@ export const TopicTaskEditionForm: FunctionComponent<EditTopicTaskInfo> = ({
         value={actionSource}
         onChange={(e) => setActionSource(e.target.value)}
       />
+      <TextField
+        id="standard-basic"
+        label="Questões Corretas"
+        variant="standard"
+        type={"number"}
+        value={correctQuestionQuantity}
+        onChange={(e) => setCorrectQuestionQuantity(parseInt(e.target.value))}
+      />
+       <TextField
+        id="standard-basic"
+        label="Questões Feitas"
+        variant="standard"
+        type={"number"}
+        value={doneQuestionQuantity}
+        onChange={(e) => setDoneQuestionQuantity(parseInt(e.target.value))}
+      />
+        <TextField
+        id="standard-basic"
+        label="Revisão"
+        variant="standard"
+        value={revisionItem}
+        onChange={(e) => setRevisionItem(e.target.value)}
+      />
       <Button onClick={save}>Salvar Mudanças</Button>
     </Card>
   );
@@ -87,4 +113,4 @@ const styles ={
 
 }
 
-export default TopicTaskEditionForm;
+export default TopicTaskFinalizeForm;
