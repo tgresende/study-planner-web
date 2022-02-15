@@ -12,7 +12,6 @@ export interface IGenerateCycleTaskRequestModel{
 
 
 export async function generateCycleTaskService(requestModel : IGenerateCycleTaskRequestModel[]){
-    alert(JSON.stringify(requestModel));
     const result = await HTTPPost(URL, requestModel);
     return result.data;
 }

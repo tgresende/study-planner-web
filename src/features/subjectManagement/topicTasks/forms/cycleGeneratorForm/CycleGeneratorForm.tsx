@@ -104,10 +104,7 @@ const CycleGeneratorForm: FunctionComponent<cycleGeneratorFormEntries> = ({
                 score: calcScoreTopic(topic.totalCorrectQuestion, topic.totalDoneQuestion)
             });
         });
-
         const newCycle : ITopicTask[] = await generateCycleTaskService(topicsApi)
-
-        alert(JSON.stringify(newCycle));
         setTopicTasksList(newCycle);
     }
 
