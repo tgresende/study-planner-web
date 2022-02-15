@@ -49,6 +49,9 @@ const TopicTasksView : FunctionComponent<TopicTasksViewEntries> = ({
         <IconButton onClick={()=>setIsNewTaskTopicDialogOpen(true)}>
         +
         </IconButton>
+        <IconButton onClick={()=>setIsNewTaskTopicDialogOpen(true)}>
+        +++
+        </IconButton>
       <Divider/>
       <div>
         {showTopicTask &&

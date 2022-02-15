@@ -55,7 +55,7 @@ export const NewTopicTaskForm: FunctionComponent<InputTopicInfo> = ({
           onChange={(event)=>setTopicId(parseInt(event.target.value.toString()))}
         >
             {topics.map((topic) =>  
-                <MenuItem value={topic.topicId}>{topic.name}</MenuItem>
+                <MenuItem value={topic.topicId}>{topic.topicName}</MenuItem>
             )}
       </Select>
       <InputLabel id="demo-simple-select-label">Ação</InputLabel>

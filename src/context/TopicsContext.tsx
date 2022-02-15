@@ -1,9 +1,11 @@
 import React from 'react';
 
 export interface ITopic {
-	name: string;
-	topicId: number;
-	anotations: string;
+	topicId: number,
+    topicName: string,
+    topicAnotations: string,
+    totalCorrectQuestion: number,
+    totalDoneQuestion: number
   }
 
 export type TopicsContextType = {
