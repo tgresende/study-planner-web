@@ -7,6 +7,7 @@ import { getActiveTopicTasks } from "../api/TopicTasksViewApi";
 import { SimpleDialog } from "../../../../shared/components/dialogs/simpleDialog/SimpleDialog";
 import NewTopicTaskForm from "../forms/NewTopicTaskForm";
 import { ITopicTask, TopicTasksContext, TopicTasksContextType } from "../../../../context/TopicTasksContext";
+import CycleGeneratorForm from "../forms/cycleGeneratorForm/CycleGeneratorForm";
 
 
 type TopicTasksViewEntries = {
@@ -20,6 +21,7 @@ const TopicTasksView : FunctionComponent<TopicTasksViewEntries> = ({
 }) => {
   const { setTopicTasksList, topicTasks } = React.useContext(TopicTasksContext)! as TopicTasksContextType;
   const [isNewTaskTopicDialogOpen, setIsNewTaskTopicDialogOpen] = React.useState<boolean>(false);
+  const [isCycleGeneratorOpen, setIsCycleGeneratorOpen] = React.useState<boolean>(false);
   const [showTopicTask, setShowTopicTasks] = React.useState<boolean>(false);
 
   function addTopicTaskContext(topicTask:ITopicTask){
@@ -49,7 +51,7 @@ const TopicTasksView : FunctionComponent<TopicTasksViewEntries> = ({
         <IconButton onClick={()=>setIsNewTaskTopicDialogOpen(true)}>
         +
         </IconButton>
-        <IconButton onClick={()=>setIsNewTaskTopicDialogOpen(true)}>
+        <IconButton onClick={()=>setIsCycleGeneratorOpen(true)}>
         +++
         </IconButton>
       <Divider/>
@@ -67,9 +69,19 @@ const TopicTasksView : FunctionComponent<TopicTasksViewEntries> = ({
           title={"Inserir Nova Tarefa"}
           childComponent={
             <NewTopicTaskForm
-            closeParent = {() => setIsNewTaskTopicDialogOpen(false)}
-            subjectName = {subjectName}
-            addTopicTaskContext = {addTopicTaskContext}
+              closeParent = {() => setIsNewTaskTopicDialogOpen(false)}
+              subjectName = {subjectName}
+              addTopicTaskContext = {addTopicTaskContext}
+            />
+          }
+        />
+        <SimpleDialog
+          open={isCycleGeneratorOpen}
+          onClose={() => setIsCycleGeneratorOpen(false)}
+          title={"Gerar novo ciclo"}
+          childComponent={
+            <CycleGeneratorForm
+              closeParent = {() => setIsCycleGeneratorOpen(false)}
             />
           }
         />
