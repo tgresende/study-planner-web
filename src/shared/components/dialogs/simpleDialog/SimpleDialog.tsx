@@ -1,4 +1,4 @@
-import { Dialog, DialogTitle } from "@mui/material";
+import { Dialog, DialogTitle, Typography } from "@mui/material";
 import { FunctionComponent } from "react";
 
 interface ISimpleDialogProps {
@@ -16,8 +16,22 @@ export const SimpleDialog: FunctionComponent<ISimpleDialogProps> = (props) => {
   };
 
   return (
-    <Dialog onClose={handleClose} open={open}>
-      <DialogTitle>{title}</DialogTitle>
+    <Dialog
+      onClose={handleClose}
+      open={open}
+      maxWidth={false}
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <DialogTitle>
+        <Typography variant="h5" align="center">
+          {title}
+        </Typography>
+      </DialogTitle>
       {childComponent}
     </Dialog>
   );
