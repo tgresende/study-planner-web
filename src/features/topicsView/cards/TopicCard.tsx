@@ -1,4 +1,4 @@
-import { Card, IconButton, Typography } from "@mui/material";
+import { Card, Typography } from "@mui/material";
 import { FunctionComponent } from "react";
 import { ITopic } from "../../../context/TopicsContext";
 
@@ -11,59 +11,55 @@ export const TopicCard: FunctionComponent<topicCardEntries> = ({
 }) => {
   const { topicName, totalDoneQuestion, totalCorrectQuestion } = topicInfo;
 
-  function printScoreIndicator(){
-    const score = totalCorrectQuestion*100/totalDoneQuestion;
+  function printScoreIndicator() {
+    const score = (totalCorrectQuestion * 100) / totalDoneQuestion;
 
-    if (score > 80) return showIconButtion("green",'A');
-    if (score > 60) return showIconButtion("yellow",'B');
-    return showIconButtion("red",'C');
+    if (score > 80) return showIconButtion("green", "A");
+    if (score > 60) return showIconButtion("yellow", "B");
+    return showIconButtion("red", "C");
   }
 
-  function showIconButtion(color: string, value:string){
+  function showIconButtion(color: string, value: string) {
     return (
-      <div style={{
-          borderRadius:18, 
-          width:36, 
-          height: 36, 
-          background:color,
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center'
-      }}>
-        <text style={{color: 'white'}}>
-          {value}
-        </text>
-    </div>)
+      <div
+        style={{
+          borderRadius: 18,
+          width: 36,
+          height: 36,
+          background: color,
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <text style={{ color: "white" }}>{value}</text>
+      </div>
+    );
   }
 
   return (
     <Card style={styles.root}>
       <div>
+        <Typography>{topicName}</Typography>
         <Typography>
-          {topicName}
+          {`${totalCorrectQuestion}/${totalDoneQuestion}`}
         </Typography>
-        <Typography>
-         {`${totalCorrectQuestion}/${totalDoneQuestion}`}
-        </Typography>
-        
       </div>
-      <div>
-        {printScoreIndicator()}
-      </div>
+      <div>{printScoreIndicator()}</div>
     </Card>
   );
 };
 
 const styles = {
   root: {
-    padding: 8, 
-    margin: 8, 
+    padding: 8,
+    margin: 8,
     width: 180,
     display: "flex",
     displayDirection: "row",
     justifyContent: "space-around",
-    alignItems: "center"
-  }
-}
+    alignItems: "center",
+  },
+};
 
 export default TopicCard;
