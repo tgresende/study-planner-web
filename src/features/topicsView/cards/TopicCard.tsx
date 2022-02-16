@@ -14,8 +14,8 @@ export const TopicCard: FunctionComponent<topicCardEntries> = ({
   function printScoreIndicator() {
     const score = (totalCorrectQuestion * 100) / totalDoneQuestion;
 
-    if (score > 80) return showIconButtion("green", "A");
-    if (score > 60) return showIconButtion("yellow", "B");
+    if (score >= 80) return showIconButtion("green", "A");
+    if (score >= 60) return showIconButtion("yellow", "B");
     return showIconButtion("red", "C");
   }
 
@@ -37,12 +37,16 @@ export const TopicCard: FunctionComponent<topicCardEntries> = ({
     );
   }
 
+  function percentual() {
+    return Math.round((totalCorrectQuestion * 100) / totalDoneQuestion);
+  }
+
   return (
     <Card style={styles.root}>
       <div>
         <Typography>{topicName}</Typography>
         <Typography>
-          {`${totalCorrectQuestion}/${totalDoneQuestion}`}
+          {`${totalCorrectQuestion}/${totalDoneQuestion} - ${percentual()}%`}
         </Typography>
       </div>
       <div>{printScoreIndicator()}</div>
