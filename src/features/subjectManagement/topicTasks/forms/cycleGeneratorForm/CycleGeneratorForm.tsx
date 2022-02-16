@@ -1,4 +1,4 @@
-import { Button, InputLabel, MenuItem, Select, TextField } from "@mui/material";
+import { Button, InputLabel, MenuItem, Select } from "@mui/material";
 import React, { FunctionComponent } from "react";
 import {
   ITopic,
@@ -15,7 +15,7 @@ import {
   IGenerateCycleTaskRequestModel,
 } from "../../../../../shared/api/generateCycleTaskUseCaseApi/generateCycleTaskUseCaseApi";
 import { calcScoreTopic } from "../../../../../shared/functions/topicFunctions";
-import { generateNewCycle } from "../../views/topicsTasksView/functions/topicTasksViewFunctions";
+import { generateNewCycle } from "./cycleGeneratorFormFunctions";
 
 type cycleGeneratorFormEntries = {
   closeParent: Function;
@@ -51,8 +51,8 @@ const CycleGeneratorForm: FunctionComponent<cycleGeneratorFormEntries> = ({
   function showSelectiontopicsB() {
     const topicsB = topics.filter(
       (topic) =>
-        (topic.totalCorrectQuestion * 100) / topic.totalDoneQuestion >= 60 &&
-        (topic.totalCorrectQuestion * 100) / topic.totalDoneQuestion < 80
+        calcScoreTopic(topic.totalCorrectQuestion, topic.totalDoneQuestion) ===
+        "B"
     );
 
     if (topicsB.length === 0) return null;
@@ -80,7 +80,8 @@ const CycleGeneratorForm: FunctionComponent<cycleGeneratorFormEntries> = ({
   function showSelectiontopicsC() {
     const topicsC = topics.filter(
       (topic) =>
-        (topic.totalCorrectQuestion * 100) / (topic.totalDoneQuestion || 1) < 60
+        calcScoreTopic(topic.totalCorrectQuestion, topic.totalDoneQuestion) ===
+        "C"
     );
 
     if (topicsC.length === 0) return null;
@@ -108,7 +109,8 @@ const CycleGeneratorForm: FunctionComponent<cycleGeneratorFormEntries> = ({
   async function generateCycle() {
     const topicsA = topics.filter(
       (topic) =>
-        (topic.totalCorrectQuestion * 100) / topic.totalDoneQuestion >= 80
+        calcScoreTopic(topic.totalCorrectQuestion, topic.totalDoneQuestion) ===
+        "A"
     );
 
     const cycle = generateNewCycle(selectedTopicB, selectedTopicC, topicsA);

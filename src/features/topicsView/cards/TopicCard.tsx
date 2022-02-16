@@ -1,6 +1,7 @@
 import { Card, Typography } from "@mui/material";
 import { FunctionComponent } from "react";
 import { ITopic } from "../../../context/TopicsContext";
+import { calcScoreTopic } from "../../../shared/functions/topicFunctions";
 
 type topicCardEntries = {
   topicInfo: ITopic;
@@ -12,14 +13,16 @@ export const TopicCard: FunctionComponent<topicCardEntries> = ({
   const { topicName, totalDoneQuestion, totalCorrectQuestion } = topicInfo;
 
   function printScoreIndicator() {
-    const score = (totalCorrectQuestion * 100) / totalDoneQuestion;
+    const score = calcScoreTopic(totalCorrectQuestion, totalDoneQuestion);
+    let color = "red";
 
-    if (score >= 80) return showIconButtion("green", "A");
-    if (score >= 60) return showIconButtion("yellow", "B");
-    return showIconButtion("red", "C");
+    if (score === "A") color = "green";
+    else if (score === "B") color = "yellow";
+
+    return showIconButton(color, score);
   }
 
-  function showIconButtion(color: string, value: string) {
+  function showIconButton(color: string, value: string) {
     return (
       <div
         style={{

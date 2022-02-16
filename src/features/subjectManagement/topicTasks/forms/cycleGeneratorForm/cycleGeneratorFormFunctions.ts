@@ -1,4 +1,4 @@
-import { ITopic } from "../../../../../../context/TopicsContext";
+import { ITopic } from "../../../../../context/TopicsContext";
 
 
 export function generateNewCycle(
