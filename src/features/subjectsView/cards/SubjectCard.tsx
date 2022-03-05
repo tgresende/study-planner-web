@@ -10,19 +10,19 @@ type subjectCardEntries = {
 export const SubjectCard: FunctionComponent<subjectCardEntries> = ({
   subjectInfo,
 }) => {
-  const { name, weight } = subjectInfo;
+  const { name, weight, score } = subjectInfo;
   const navigate = useNavigate();
 
-  function navigateToSubjectManagement(){
-    navigate('/subjectManagement', { state: { subject: subjectInfo } });
+  function navigateToSubjectManagement() {
+    navigate("/subjectManagement", { state: { subject: subjectInfo } });
   }
 
   return (
-    <Card 
-      style={{padding: 8, margin: 8}} 
+    <Card
+      style={{ padding: 8, margin: 8 }}
       onClick={navigateToSubjectManagement}
     >
-      {name} - {weight}
+      {name} - {weight} - score:{score}
     </Card>
   );
 };

@@ -3,4 +3,5 @@ export interface ISubject {
   subjectId: number;
   weight: number;
   annotations: number;
+  score: number;
 }

@@ -4,38 +4,49 @@ import { getAllTopics } from "../api/TopicsViewApi";
 import TopicCard from "../cards/TopicCard";
 import { SimpleDialog } from "../../../shared/components/dialogs/simpleDialog/SimpleDialog";
 import NewTopicForm from "../../subjectManagement/topics/forms/newTopicForm/NewTopicForm";
-import { ITopic, TopicsContext, TopicsContextType } from "../../../context/TopicsContext";
+import {
+  ITopic,
+  TopicsContext,
+  TopicsContextType,
+} from "../../../context/TopicsContext";
 
 type topicViewEntries = {
   subjectId: number;
   subjectName: string;
 };
 
-const TopicsView : FunctionComponent<topicViewEntries> = ({
+const TopicsView: FunctionComponent<topicViewEntries> = ({
   subjectId,
-  subjectName
-}) =>
-{
-  const { setTopicsList, topics } = React.useContext(TopicsContext)! as TopicsContextType;
-  const [isNewDialogTopicOpen, setIsNewDialogTopicOpen] = React.useState<boolean>(false);
+  subjectName,
+}) => {
+  const { setTopicsList, topics } = React.useContext(
+    TopicsContext
+  )! as TopicsContextType;
+  const [isNewDialogTopicOpen, setIsNewDialogTopicOpen] =
+    React.useState<boolean>(false);
   const [showTopics, setShowTopics] = React.useState<boolean>(true);
 
-  function handleShowTopiccs(){
+  function handleShowTopiccs() {
     setShowTopics(!showTopics);
   }
 
-  function addtopicToView(newTopic:ITopic ){
-    setTopicsList([...topics, newTopic ])
+  function addtopicToView(newTopic: ITopic) {
+    setTopicsList([...topics, newTopic]);
   }
 
   async function getTopics() {
     const topics = await getAllTopics(subjectId);
-    setTopicsList(topics)
+    let ordered = topics.sort(
+      (a, b) =>
+        b.totalCorrectQuestion / b.totalDoneQuestion -
+        a.totalCorrectQuestion / a.totalDoneQuestion
+    );
+    setTopicsList(ordered);
   }
 
-  function showStatusAccordin(){
-    if (showTopics) return 'V';
-    return '>'
+  function showStatusAccordin() {
+    if (showTopics) return "V";
+    return ">";
   }
 
   React.useEffect(() => {
@@ -46,44 +57,42 @@ const TopicsView : FunctionComponent<topicViewEntries> = ({
     <div>
       <Typography>
         <IconButton onClick={handleShowTopiccs}>
-         {showStatusAccordin()}
+          {showStatusAccordin()}
         </IconButton>
-          Topicos
-        <IconButton onClick={()=>setIsNewDialogTopicOpen(true)}>
-        +
-        </IconButton>
+        Topicos
+        <IconButton onClick={() => setIsNewDialogTopicOpen(true)}>+</IconButton>
       </Typography>
-      <Divider/>
-      {showTopics &&
+      <Divider />
+      {showTopics && (
         <div style={styles.TopicCardsContainer as React.CSSProperties}>
           {topics.map((topic) => (
             <TopicCard topicInfo={topic} />
-            ))}
+          ))}
           <SimpleDialog
             open={isNewDialogTopicOpen}
             onClose={() => setIsNewDialogTopicOpen(false)}
             title={"Inserir Novo Tópico"}
             childComponent={
               <NewTopicForm
-                subjectId = {subjectId}
-                closeParent = {() => setIsNewDialogTopicOpen(false)}
-                subjectName = {subjectName}
-                addtopicToView = {addtopicToView}
+                subjectId={subjectId}
+                closeParent={() => setIsNewDialogTopicOpen(false)}
+                subjectName={subjectName}
+                addtopicToView={addtopicToView}
               />
             }
           />
         </div>
-      }
+      )}
     </div>
   );
-}
+};
 
-const styles ={
+const styles = {
   TopicCardsContainer: {
     display: "flex",
     flexDirection: "row",
-    flexWrap: "wrap"
-  }
-}
+    flexWrap: "wrap",
+  },
+};
 
 export default TopicsView;

@@ -5,14 +5,17 @@ import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import TopicsProvider from "./context/TopicsContext";
 import TopicTasksProvider from "./context/TopicTasksContext";
+import SubjectTasksProvider from "./context/SubjectTasksContext";
 
 ReactDOM.render(
   <React.StrictMode>
     <TopicsProvider>
       <TopicTasksProvider>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
+        <SubjectTasksProvider>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </SubjectTasksProvider>
       </TopicTasksProvider>
     </TopicsProvider>
   </React.StrictMode>,

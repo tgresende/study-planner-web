@@ -25,7 +25,6 @@ export const TopicTaskCard: FunctionComponent<topicCardEntries> = ({
     <Card style={styles.root}>
       <Typography>{action}</Typography>
       <Typography>{topicName}</Typography>
-      <Typography>i:30 min</Typography>
       <Button onClick={() => setIsTopicTaskHistoryOpen(true)}>history</Button>
       <Button onClick={() => setIsEditionTaskTopicDialogOpen(true)}>
         info
